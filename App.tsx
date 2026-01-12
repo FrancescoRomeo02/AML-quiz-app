@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { parseQuestions, RAW_DATA } from './services/parser';
+import { questions as questionsData } from './questions';
 import { Question, QuestionStats } from './types';
 import { getNextQuestion, updateStats } from './utils/srs';
 import QuizCard from './components/QuizCard';
@@ -14,8 +14,8 @@ export default function App() {
 
   // Load questions on mount
   useEffect(() => {
-    const parsed = parseQuestions(RAW_DATA);
-    setQuestions(parsed);
+    // Cast JSON data to Question type to ensure compatibility
+    setQuestions(questionsData as Question[]);
     setLoading(false);
   }, []);
 

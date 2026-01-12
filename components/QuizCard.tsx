@@ -122,7 +122,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ question, onAnswer, streak }) => {
                   </div>
                 </div>
                 <div className="text-sm md:text-base text-slate-700">
-                    {option.replace(/^[A-Z]\)\s*/, '')} {/* Strip the "A) " prefix for cleaner UI */}
+                    {option}
                 </div>
               </div>
             );
