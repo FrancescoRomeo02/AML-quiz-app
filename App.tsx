@@ -7,7 +7,18 @@ import { Brain, Trophy, Activity, RotateCcw } from 'lucide-react';
 
 export default function App() {
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [stats, setStats] = useState<Record<string, QuestionStats>>({});
+  
+  // Initialize stats from localStorage if available
+  const [stats, setStats] = useState<Record<string, QuestionStats>>(() => {
+    try {
+      const saved = localStorage.getItem('ml-mastery-stats');
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      console.error("Failed to load stats from storage", e);
+      return {};
+    }
+  });
+
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [sessionActive, setSessionActive] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -18,6 +29,11 @@ export default function App() {
     setQuestions(questionsData as Question[]);
     setLoading(false);
   }, []);
+
+  // Save stats to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('ml-mastery-stats', JSON.stringify(stats));
+  }, [stats]);
 
   const startSession = () => {
     setSessionActive(true);
@@ -37,13 +53,21 @@ export default function App() {
     setCurrentQuestion(next);
   };
 
+  const handleReset = () => {
+    if (window.confirm("Sei sicuro di voler resettare tutti i progressi? Questa azione è irreversibile.")) {
+      setStats({});
+    }
+  };
+
   // Computed Stats for Dashboard
   const dashboardStats = useMemo(() => {
     const total = questions.length;
     const attempted = Object.keys(stats).length;
-    const mastered = Object.values(stats).filter(s => s.streak >= 3).length;
-    const learning = Object.values(stats).filter(s => s.streak > 0 && s.streak < 3).length;
-    const struggling = Object.values(stats).filter(s => s.streak === 0).length;
+    // Explicitly cast to QuestionStats[] to handle cases where Object.values returns unknown[]
+    const statValues = Object.values(stats) as QuestionStats[];
+    const mastered = statValues.filter(s => s.streak >= 3).length;
+    const learning = statValues.filter(s => s.streak > 0 && s.streak < 3).length;
+    const struggling = statValues.filter(s => s.streak === 0).length;
     
     return { total, attempted, mastered, learning, struggling };
   }, [questions, stats]);
@@ -142,7 +166,7 @@ export default function App() {
             {dashboardStats.attempted > 0 && (
                 <div className="text-center">
                     <button 
-                        onClick={() => setStats({})}
+                        onClick={handleReset}
                         className="text-sm text-slate-400 hover:text-red-500 flex items-center gap-1 mx-auto transition-colors"
                     >
                         <RotateCcw size={14} /> Reset Progress
