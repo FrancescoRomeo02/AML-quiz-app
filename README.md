@@ -2,6 +2,10 @@
 
 A React-based web application designed to help students master Advanced Machine Learning concepts using **Spaced Repetition**.
 
+🚀 **Live Demo:** [https://aml-quiz-app.vercel.app](https://aml-quiz-app.vercel.app)
+
+![App Home Screen](./screenshot.png)
+
 The application uses a weighted algorithm to prioritize questions you struggle with, ensuring efficient study sessions by showing difficult concepts more frequently than mastered ones.
 
 ## Features

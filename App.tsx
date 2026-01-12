@@ -83,7 +83,7 @@ export default function App() {
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
             <div className="flex items-center gap-2 text-brand-600">
                 <Brain className="w-6 h-6" />
-                <h1 className="font-bold text-lg tracking-tight text-slate-900">ML Mastery</h1>
+                <h1 className="font-bold text-lg tracking-tight text-slate-900">AML Mastery</h1>
             </div>
             {sessionActive && (
                  <button 
