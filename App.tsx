@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { questions as questionsData } from './questions';
 import { Question, QuestionStats } from './types';
 import { getNextQuestion, updateStats } from './utils/srs';
@@ -78,6 +79,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
+      <Analytics />
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
