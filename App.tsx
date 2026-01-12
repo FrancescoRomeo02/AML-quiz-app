@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { questions as questionsData } from './questions';
 import { Question, QuestionStats } from './types';
 import { getNextQuestion, updateStats } from './utils/srs';
