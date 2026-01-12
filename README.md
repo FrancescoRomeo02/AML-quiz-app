@@ -1,20 +1,38 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# AML Spaced Repetition Quiz
 
-# Run and deploy your AI Studio app
+A React-based web application designed to help students master Advanced Machine Learning concepts using **Spaced Repetition**.
 
-This contains everything you need to run your app locally.
+The application uses a weighted algorithm to prioritize questions you struggle with, ensuring efficient study sessions by showing difficult concepts more frequently than mastered ones.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1Ee2Rla5ocJUZac20_JXg0mTxK8jeiTi7
+## Features
 
-## Run Locally
+- 🧠 **Spaced Repetition System (SRS)**: Automatically adjusts the frequency of questions based on your performance streak.
+- 📊 **Progress Dashboard**: Visual tracking of your mastery level (Mastered, Learning, Needs Review).
+- 💾 **Local Persistence**: Your progress is automatically saved to your browser's local storage.
+- 🚩 **Error Reporting**: Integrated system to report issues with questions or answers directly to the maintainer via GitHub Issues or Email.
+- 📱 **Responsive Design**: Optimized for both desktop and mobile study sessions.
 
-**Prerequisites:**  Node.js
+## Tech Stack
 
+- **Framework**: React + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+
+## Development
+
+To run this project locally:
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Credits
+
+**Built with Google AI Studio.**

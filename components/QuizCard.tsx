@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Question } from '../types';
-import { Check, X, AlertCircle } from 'lucide-react';
+import { Check, X, AlertCircle, Flag } from 'lucide-react';
+import { REPORT_EMAIL, GITHUB_REPO } from '../config';
 
 interface QuizCardProps {
   question: Question;
@@ -52,15 +53,48 @@ const QuizCard: React.FC<QuizCardProps> = ({ question, onAnswer, streak }) => {
     onAnswer(isCorrect);
   };
 
+  const handleReport = () => {
+    const title = `Segnalazione Errore: Domanda ${question.id}`;
+    const body = `
+**ID Domanda:** ${question.id}
+**Categoria:** ${question.category}
+**Testo Domanda:** ${question.text.substring(0, 150)}${question.text.length > 150 ? '...' : ''}
+
+**Descrizione dell'errore:**
+[Scrivi qui cosa c'è di sbagliato...]
+    `.trim();
+
+    if (GITHUB_REPO) {
+        // Open GitHub Issue
+        const url = `https://github.com/${GITHUB_REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+        window.open(url, '_blank');
+    } else {
+        // Fallback to Email
+        const url = `mailto:${REPORT_EMAIL}?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+        window.open(url, '_blank');
+    }
+  };
+
   return (
     <div className="w-full max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
       {/* Header / Category */}
       <div className="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-        <span className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+        <span className="text-xs font-semibold tracking-wider text-slate-500 uppercase truncate max-w-[50%]">
           {question.category}
         </span>
-        <div className="flex items-center gap-2">
-           <span className="text-xs text-slate-400">Streak:</span>
+        <div className="flex items-center gap-3">
+           {/* Report Button */}
+           <button 
+             onClick={handleReport}
+             className="text-slate-400 hover:text-red-500 transition-colors p-1"
+             title="Segnala un errore in questa domanda"
+           >
+             <Flag size={16} />
+           </button>
+           
+           <div className="h-4 w-px bg-slate-300 mx-1"></div>
+
+           <span className="text-xs text-slate-400 hidden sm:inline">Streak:</span>
            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${streak > 2 ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-600'}`}>
              {streak} 🔥
            </span>
@@ -146,12 +180,12 @@ const QuizCard: React.FC<QuizCardProps> = ({ question, onAnswer, streak }) => {
                 {isCorrect ? (
                     <>
                         <div className="p-1 bg-green-100 rounded-full"><Check size={16} /></div>
-                        <span>Correct! Well done.</span>
+                        <span className="text-sm md:text-base">Correct! Well done.</span>
                     </>
                 ) : (
                     <>
                         <div className="p-1 bg-red-100 rounded-full"><X size={16} /></div>
-                        <span>Incorrect. Review the answer.</span>
+                        <span className="text-sm md:text-base">Incorrect. Review answer.</span>
                     </>
                 )}
             </div>
