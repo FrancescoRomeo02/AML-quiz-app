@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, signInWithPopup, signOut } from 'firebase/auth';
-import { auth, googleProvider } from '../firebase';
+import { auth, googleProvider } from '../firebase.ts';
 import { LogIn, LogOut, User as UserIcon } from 'lucide-react';
 
 interface UserMenuProps {
@@ -15,15 +15,15 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
     } catch (error: any) {
       console.error("Login failed", error);
       
-      // Gestione errori più dettagliata per aiutare il debug
       let message = "Si è verificato un errore durante il login.";
       
       if (error.code === 'auth/popup-closed-by-user') {
-        message = "Login annullato: hai chiuso la finestra.";
+        message = "Login annullato.";
       } else if (error.code === 'auth/cancelled-popup-request') {
-        message = "Richiesta annullata perché ne è stata aperta un'altra.";
+        message = "Richiesta annullata.";
       } else if (error.code === 'auth/unauthorized-domain') {
-        message = "Dominio non autorizzato. Vai nella Console Firebase > Authentication > Settings > Authorized Domains e aggiungi questo dominio.";
+        // Mostra il dominio corrente per facilitare il debug
+        message = `Dominio non autorizzato (${window.location.hostname}). Vai nella Console Firebase > Authentication > Settings > Authorized Domains e aggiungi questo dominio.`;
       } else if (error.code === 'auth/operation-not-allowed') {
         message = "Il login con Google non è abilitato nella Console Firebase.";
       } else if (error.message) {
@@ -38,7 +38,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
     try {
       if (window.confirm("Sei sicuro di voler uscire?")) {
         await signOut(auth);
-        window.location.reload(); // Ricarica per pulire lo stato
+        window.location.reload(); 
       }
     } catch (error) {
       console.error("Logout failed", error);
