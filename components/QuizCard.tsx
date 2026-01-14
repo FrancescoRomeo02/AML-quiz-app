@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Question } from '../types';
-import { Check, X, AlertCircle, Flag } from 'lucide-react';
+import { Check, X, AlertCircle, Flag, AlertTriangle } from 'lucide-react';
 import { REPORT_EMAIL, GITHUB_REPO } from '../config';
 
 interface QuizCardProps {
@@ -83,7 +83,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ question, onAnswer, streak }) => {
           {question.category}
         </span>
         <div className="flex items-center gap-3">
-           {/* Report Button */}
+           {/* Report Button (Icon only) */}
            <button 
              onClick={handleReport}
              className="text-slate-400 hover:text-red-500 transition-colors p-1"
@@ -175,23 +175,38 @@ const QuizCard: React.FC<QuizCardProps> = ({ question, onAnswer, streak }) => {
             Submit Answer
           </button>
         ) : (
-          <div className="flex items-center w-full justify-between">
-            <div className={`flex items-center gap-2 font-medium ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
-                {isCorrect ? (
-                    <>
-                        <div className="p-1 bg-green-100 rounded-full"><Check size={16} /></div>
-                        <span className="text-sm md:text-base">Correct! Well done.</span>
-                    </>
-                ) : (
-                    <>
-                        <div className="p-1 bg-red-100 rounded-full"><X size={16} /></div>
-                        <span className="text-sm md:text-base">Incorrect. Review answer.</span>
-                    </>
+          <div className="flex flex-col sm:flex-row items-center w-full justify-between gap-4">
+             {/* Feedback Area */}
+             <div className="flex flex-col w-full sm:w-auto">
+                <div className={`flex items-center gap-2 font-medium ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+                    {isCorrect ? (
+                        <>
+                            <div className="p-1 bg-green-100 rounded-full"><Check size={16} /></div>
+                            <span className="text-sm md:text-base">Correct! Well done.</span>
+                        </>
+                    ) : (
+                        <>
+                            <div className="p-1 bg-red-100 rounded-full"><X size={16} /></div>
+                            <span className="text-sm md:text-base">Incorrect. Review answer.</span>
+                        </>
+                    )}
+                </div>
+
+                {/* Explicit Report Action for Incorrect Answers */}
+                {!isCorrect && (
+                   <button 
+                     onClick={handleReport}
+                     className="mt-2 text-xs text-red-500 hover:text-red-700 hover:bg-red-50 px-2 py-1 -ml-2 rounded transition-colors flex items-center gap-1.5 w-fit"
+                   >
+                     <AlertTriangle size={12} />
+                     <span>Pensi sia corretta? Segnala errore</span>
+                   </button>
                 )}
-            </div>
+             </div>
+
             <button
                 onClick={handleNext}
-                className="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg shadow-sm transition-colors flex items-center gap-2"
+                className="w-full sm:w-auto px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2"
             >
                 Next Question
             </button>
