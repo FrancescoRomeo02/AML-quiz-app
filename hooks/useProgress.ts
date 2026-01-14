@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { QuestionStats } from '../types';
 import { updateStats } from '../utils/srs';
-import { auth, db } from '../firebase.ts';
+import { auth, db } from '../firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
