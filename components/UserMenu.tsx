@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, signInWithPopup, signOut } from 'firebase/auth';
-import { auth, googleProvider } from '../firebase';
+import { auth, googleProvider } from '../firebase.ts';
 import { LogIn, LogOut, User as UserIcon } from 'lucide-react';
 
 interface UserMenuProps {
