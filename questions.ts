@@ -375,7 +375,7 @@ export const questions: Question[] = [
       "The addition of the L2 term modifies the learning rule by shrinking the weight factor by a constant factor on each parameter update",
       "L2 rescales the weights along the axes defined by the eigenvectors of the Hessian matrix"
     ],
-    "correctIndices": [0, 1, 3, 4]
+    "correctIndices": [1, 3]
   },
   {
     "id": "q-40",
@@ -449,7 +449,7 @@ export const questions: Question[] = [
       "The minimization of the true risk function",
       "The minimization of the empirical risk using a surrogate loss function"
     ],
-    "correctIndices": [0]
+    "correctIndices": [1]
   },
   {
     "id": "q-47",
@@ -459,7 +459,7 @@ export const questions: Question[] = [
       "Acts as a proxy to the true risk being \"nice\" enough to be optimized efficiently",
       "Acts as a proxy to empirical risk being \"nice\" enough to be optimized efficiently"
     ],
-    "correctIndices": [1]
+    "correctIndices": [0]
   },
   {
     "id": "q-48",
@@ -498,7 +498,7 @@ export const questions: Question[] = [
     "category": "Other questions from previous years",
     "text": "Local minima in deep learning problems",
     "options": ["Are rare", "Are more common than saddle points", "Are much more likely to have a low cost than a high cost"],
-    "correctIndices": [0, 2]
+    "correctIndices": [0]
   },
   {
     "id": "q-52",
@@ -531,7 +531,7 @@ export const questions: Question[] = [
       "Decreases the learning rate too much in the early stages",
       "Uses the same learning rate for all parameters"
     ],
-    "correctIndices": [0]
+    "correctIndices": [0, 1]
   },
   {
     "id": "q-55",
