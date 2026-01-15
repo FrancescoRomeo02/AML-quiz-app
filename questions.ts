@@ -375,7 +375,7 @@ export const questions: Question[] = [
       "The addition of the L2 term modifies the learning rule by shrinking the weight factor by a constant factor on each parameter update",
       "L2 rescales the weights along the axes defined by the eigenvectors of the Hessian matrix"
     ],
-    "correctIndices": [0, 1, 3]
+    "correctIndices":  1, 3]
   },
   {
     "id": "q-40",
@@ -449,7 +449,7 @@ export const questions: Question[] = [
       "The minimization of the true risk function",
       "The minimization of the empirical risk using a surrogate loss function"
     ],
-    "correctIndices": [1]
+    "correctIndices": [0]
   },
   {
     "id": "q-47",
