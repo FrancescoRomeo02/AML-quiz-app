@@ -459,7 +459,7 @@ export const questions: Question[] = [
       "Acts as a proxy to the true risk being \"nice\" enough to be optimized efficiently",
       "Acts as a proxy to empirical risk being \"nice\" enough to be optimized efficiently"
     ],
-    "correctIndices": [1]
+    "correctIndices": [0]
   },
   {
     "id": "q-48",
