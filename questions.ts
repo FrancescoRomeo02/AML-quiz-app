@@ -855,7 +855,7 @@ export const questions: Question[] = [
     "category": "Second part of the course",
     "text": "The elements that are needed for the computation of self attention are",
     "options": ["Outputs", "Inputs", "Values", "Variables", "Queries", "Questions", "Keys", "Chains"],
-    "correctIndices": [2, 4, 6]
+    "correctIndices": [1, 2, 4, 6]
   },
   {
     "id": "q-part2-38",
